@@ -13,7 +13,7 @@ const songSchema = new mongoose.Schema({
         type: String
     },
     duration: {
-        type: Time,
+        type: Number,
         required: true
     },
     singers: {
