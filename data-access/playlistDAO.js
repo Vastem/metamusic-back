@@ -1,6 +1,7 @@
-const Playlist = require('../schemas/Playlist');
+//const Playlist = require('../schemas/Playlist');
+import { Playlist } from "../schemas/Playlist";
 
-module.exports = class PlaylistDAO {
+export class PlaylistDAO {
     constructor() { }
 
     async create(playlistData) {
@@ -47,5 +48,4 @@ module.exports = class PlaylistDAO {
             console.log(error);
         }
     }
-
 }

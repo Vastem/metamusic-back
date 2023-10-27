@@ -1,6 +1,6 @@
-const Song = require('../schemas/Song');
+import Song from "../schemas/Song.js"
 
-module.exports = class SongDAO {
+export default class SongDAO {
     constructor() { }
 
     async create(songData) {

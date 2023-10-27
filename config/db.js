@@ -1,20 +1,20 @@
-const mongoose = require('mongoose')
+import mongoose from "mongoose"
+import dotenv from "dotenv"
+dotenv.config();
 
-const config = {
-    url: 'mongodb://127.0.0.1:27017/meta-music',
+export const config = {
+    url: process.env.DATABASE_URL,
     options: {
         usenewUrlParser: true,
         useUnifiedTopology: true
     }
 }
 
-function conectar() {
+export function connect() {
     return mongoose.connect(config.url, config.options)
 }
 
 
-function desconectar() {
+export function disconnect() {
     return mongoose.disconnect()
 }
-
-module.exports = { conectar, desconectar }

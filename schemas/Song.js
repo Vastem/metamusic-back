@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+import mongoose from 'mongoose'
 
 const songSchema = new mongoose.Schema({
     idsong: {
@@ -22,4 +22,5 @@ const songSchema = new mongoose.Schema({
     }
 })
 
-module.exports = mongoose.model('Song', songSchema) 
+const Song = mongoose.model('Song', songSchema);
+export default Song;

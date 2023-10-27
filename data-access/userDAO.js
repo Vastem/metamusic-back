@@ -1,6 +1,6 @@
-const User = require('../schemas/User');
+import User from '../schemas/User';
 
-module.exports = class UserDAO {
+export default class UserDAO {
     constructor() { }
 
     async create(userData) {
@@ -47,5 +47,4 @@ module.exports = class UserDAO {
             console.log(error);
         }
     }
-
 }

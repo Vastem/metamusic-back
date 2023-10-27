@@ -1,22 +1,21 @@
-const { conectar, desconectar } = require("./config/db");
-const SongDAO = require("./data-access/songDAO")
+import { connect, disconnect } from "./config/db.js";
+import SongDAO from "./data-access/songDAO.js";
 
 const songData = {
-    idsong: 2,
-    name:"Tecateando 2",
-    album:"Softober 2",
-    duration: 120,
-    singers: "Evan Price"
+    idsong: 10,
+    name:"MONACO",
+    album:"ndlqvapm",
+    duration: 150,
+    singers: "Bad Bunny"
 }
 
 async function main(){
     try {
         const song = new SongDAO();
-
-        await conectar()
+        await connect()
         await song.create(songData)
         console.log("Cancion creada")
-        await desconectar()
+        await disconnect()
     } catch (error) {
         console.log(error)
     }
