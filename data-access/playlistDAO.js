@@ -1,4 +1,5 @@
 //const Playlist = require('../schemas/Playlist');
+import DataAccesError from "../errors/DataAccesError";
 import { Playlist } from "../schemas/Playlist";
 
 export class PlaylistDAO {
@@ -10,6 +11,7 @@ export class PlaylistDAO {
             return await playlist.save();
         } catch (error) {
             console.log(error);
+            throw new DataAccesError("Lo sentimos, se ha producido un problema en la base de datos. Por favor, inténtelo de nuevo más tarde.")
         }
     }
 
@@ -19,6 +21,7 @@ export class PlaylistDAO {
             return playlist;
         } catch (error) {
             console.log(error);
+            throw new DataAccesError("Lo sentimos, se ha producido un problema en la base de datos. Por favor, inténtelo de nuevo más tarde.")
         }
     }
 
@@ -28,6 +31,7 @@ export class PlaylistDAO {
             return playlist;
         } catch (error) {
             console.log(error);
+            throw new DataAccesError("Lo sentimos, se ha producido un problema en la base de datos. Por favor, inténtelo de nuevo más tarde.")
         }
     }
 
@@ -37,6 +41,7 @@ export class PlaylistDAO {
             return playlists;
         } catch (error) {
             console.log(error);
+            throw new DataAccesError("Lo sentimos, se ha producido un problema en la base de datos. Por favor, inténtelo de nuevo más tarde.")
         }
     }
 
@@ -46,6 +51,7 @@ export class PlaylistDAO {
             return playlist;
         } catch (error) {
             console.log(error);
+            throw new DataAccesError("Lo sentimos, se ha producido un problema en la base de datos. Por favor, inténtelo de nuevo más tarde.")
         }
     }
 }
