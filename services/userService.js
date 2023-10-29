@@ -1,41 +1,48 @@
 import UserDAO from "../data-access/userDAO.js";
 import ValidationError from "../errors/ValidationError.js";
 
-export default class UserService{
-    constructor(){
+export default class UserService {
+    constructor() {
         this.userDAO = new UserDAO()
     }
 
-    async createUser(userData){
+    async createUser(userData) {
         const usernameExist = await this.userDAO.getByUsername(userData.username)
         const emailExist = await this.userDAO.getByEmail(userData.email)
-        if(usernameExist) throw new ValidationError("El username ya está registrado")
-        if(emailExist) throw new ValidationError("El email ya está registrado")
+        if (usernameExist) throw new ValidationError("El username ya está registrado")
+        if (emailExist) throw new ValidationError("El email ya está registrado")
         const user = await this.userDAO.create(userData);
         return user
     }
 
-    async updateUser(id, userData){
+    async updateUser(id, userData) {
         const userToUpdate = await this.userDAO.getById(id)
-        if(!userToUpdate ) throw new ValidationError("El usuario no existe")
-        const userUpdated= await this.userDAO.update(id, userData)
+        if (!userToUpdate) throw new ValidationError("El usuario no existe")
+        const userUpdated = await this.userDAO.update(id, userData)
         return userUpdated
     }
 
-    async deleteUser(id){
+    async deleteUser(id) {
         const userDeleted = await this.userDAO.delete(id)
-        if(!userDeleted) throw new ValidationError("El usuario no existe")
+        if (!userDeleted) throw new ValidationError("El usuario no existe")
         return userDeleted
     }
 
-    async getUsers(limit){
+    async getUsers(limit) {
         const users = await this.userDAO.get(limit)
         return users
     }
 
-    async getUser(id){
+    async getUser(id) {
         const user = await this.userDAO.getById(id)
-        if(!user) throw new ValidationError("El usuario no existe")
+        if (!user) throw new ValidationError("El usuario no existe")
+        return user
+    }
+
+    async login(userData) {
+        const user = await this.userDAO.getByUsername(userData.username)
+        if (!user) throw new ValidationError("El usuario no existe")
+        if (user.password !== userData.password) throw new ValidationError("La contraseña es incorrecta")
         return user
     }
 }

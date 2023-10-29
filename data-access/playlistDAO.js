@@ -1,13 +1,13 @@
-import DataAccesError from "../errors/DataAccesError";
-import { Playlist } from "../schemas/Playlist";
+import DataAccesError from "../errors/DataAccesError.js";
+import PlayList from "../schemas/Playlist.js";
 import mongoose from "mongoose";
 
-export class PlaylistDAO {
+export default class PlaylistDAO {
     constructor() { }
 
     async create(playlistData) {
         try {
-            const playlist = new Playlist(playlistData);
+            const playlist = new PlayList(playlistData);
             return await playlist.save();
         } catch (error) {
             console.log(error);
@@ -17,7 +17,7 @@ export class PlaylistDAO {
 
     async update(id, playlistData) {
         try {
-            const playlist = await Playlist.findByIdAndUpdate(new mongoose.Types.ObjectId(id), playlistData, { new: true });
+            const playlist = await PlayList.findByIdAndUpdate(new mongoose.Types.ObjectId(id), playlistData, { new: true });
             return playlist;
         } catch (error) {
             console.log(error);
@@ -27,7 +27,7 @@ export class PlaylistDAO {
 
     async delete(id) {
         try {
-            const playlist = await Playlist.findByIdAndRemove(new mongoose.Types.ObjectId(id));
+            const playlist = await PlayList.findByIdAndRemove(new mongoose.Types.ObjectId(id));
             return playlist;
         } catch (error) {
             console.log(error);
@@ -37,7 +37,7 @@ export class PlaylistDAO {
 
     async get(limit = 10) {
         try {
-            const playlists = await Playlist.find().limit(limit);
+            const playlists = await PlayList.find().limit(limit);
             return playlists;
         } catch (error) {
             console.log(error);
@@ -47,7 +47,7 @@ export class PlaylistDAO {
 
     async getById(id) {
         try {
-            const playlist = await Playlist.findById(new mongoose.Types.ObjectId(id));
+            const playlist = await PlayList.findById(new mongoose.Types.ObjectId(id));
             return playlist;
         } catch (error) {
             console.log(error);
@@ -55,10 +55,10 @@ export class PlaylistDAO {
         }
     }
 
-    async getByName(name){
+    async getByName(name) {
         try {
-            const regex = new RegExp(name, "i"); 
-            const playlists = await Playlist.find({ name: { $regex: regex } });
+            const regex = new RegExp(name, "i");
+            const playlists = await PlayList.find({ name: { $regex: regex } });
             return playlists
         } catch (error) {
             console.log(error);
@@ -66,10 +66,10 @@ export class PlaylistDAO {
         }
     }
 
-    async getByUser(user){
+    async getByUser(user) {
         try {
-            const regex = new RegExp(user, "i"); 
-            const playlists = await Playlist.find({ user: { $regex: regex } });
+            const regex = new RegExp(user, "i");
+            const playlists = await PlayList.find({ user: { $regex: regex } });
             return playlists
         } catch (error) {
             console.log(error);
