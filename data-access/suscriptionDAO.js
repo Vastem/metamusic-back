@@ -6,6 +6,7 @@ export default class SuscriptionDAO{
     async create(suscriptionData){
         try {
             const suscription = new Suscription(suscriptionData)
+            return await suscription.save()
         } catch (error) {
             console.log(error)
             throw new DataAccesError("Lo sentimos, se ha producido un problema en la base de datos. Por favor, inténtelo de nuevo más tarde.")

@@ -1,5 +1,6 @@
-import DataAccesError from '../errors/DataAccesError';
-import User from '../schemas/User';
+import DataAccesError from '../errors/DataAccesError.js';
+import User from '../schemas/User.js';
+import mongoose from "mongoose";
 
 export default class UserDAO {
     constructor() { }
@@ -16,7 +17,7 @@ export default class UserDAO {
 
     async update(id, userData) {
         try {
-            const user = await User.findByIdAndUpdate(id, userData, { new: true });
+            const user = await User.findByIdAndUpdate(new mongoose.Types.ObjectId(id), userData, { new: true });
             return user;
         } catch (error) {
             console.log(error);
@@ -26,7 +27,7 @@ export default class UserDAO {
 
     async delete(id) {
         try {
-            const user = await User.findByIdAndRemove(id);
+            const user = await User.findByIdAndRemove(new mongoose.Types.ObjectId(id));
             return user;
         } catch (error) {
             console.log(error);
@@ -46,11 +47,31 @@ export default class UserDAO {
 
     async getID(id) {
         try {
-            const user = await User.findById(id);
+            const user = await User.findById(new mongoose.Types.ObjectId(id));
             return user;
         } catch (error) {
             console.log(error);
             throw new DataAccesError("Lo sentimos, se ha producido un problema en la base de datos. Por favor, inténtelo de nuevo más tarde.")
+        }
+    }
+
+    async getByUsername(username) {
+        try {
+          const user = await User.findOne({ username });
+          return user;
+        } catch (error) {
+          console.log(error);
+          throw new DataAccesError("Lo sentimos, se ha producido un problema en la base de datos. Por favor, inténtelo de nuevo más tarde.");
+        }
+    }
+
+    async getByEmail(email) {
+        try {
+          const user = await User.findOne({ email });
+          return user;
+        } catch (error) {
+          console.log(error);
+          throw new DataAccesError("Lo sentimos, se ha producido un problema en la base de datos. Por favor, inténtelo de nuevo más tarde.");
         }
     }
 }

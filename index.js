@@ -1,24 +1,23 @@
-import { connect, disconnect } from "./config/db.js";
-import SongDAO from "./data-access/songDAO.js";
+import express from "express";
+import userRouter from "./routes/userRoutes.js";
+import songRouter from './routes/songRoutes.js'
+import adminRouter from './routes/adminRoutes.js'
+import { connectDatabase } from "./middlewares/connectDatabase.js";
 
-const songData = {
-    idsong: 10,
-    name:"MONACO",
-    album:"ndlqvapm",
-    duration: 150,
-    singers: "Bad Bunny"
-}
+const app = express();
+app.use(express.json());
 
-async function main(){
-    try {
-        const song = new SongDAO();
-        await connect()
-        await song.create(songData)
-        console.log("Cancion creada")
-        await disconnect()
-    } catch (error) {
-        console.log(error)
-    }
-}
+// Inicia la conexion a la base de datos
+app.use("/", connectDatabase)
 
-main()
+app.use("/user", userRouter)
+app.use("/song", songRouter)
+app.use("/admin", adminRouter)
+
+
+
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, ()=>{
+    console.log("Servidor express escuchando en el puerto " + PORT)
+})
