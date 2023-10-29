@@ -1,6 +1,7 @@
 # Meta Music
 
 This is the API for an audio stream platfrom.
+![Meta Music logo](/meta-music.jpg)
 
 ## 💁‍♀️ How to install
 
