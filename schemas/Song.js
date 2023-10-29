@@ -23,7 +23,7 @@ const songSchema = new mongoose.Schema({
     image: {
         type: String
     }
-})
+}, { versionKey: false })
 
 const Song = mongoose.model('Song', songSchema);
 export default Song;

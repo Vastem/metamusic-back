@@ -12,8 +12,12 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true
+    },
+    suscription: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Suscription'
     }
-});
+}, { versionKey: false });
 
 const User = mongoose.model('User', userSchema);
 export default User;

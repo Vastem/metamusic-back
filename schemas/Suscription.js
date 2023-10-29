@@ -17,7 +17,7 @@ const subscriptionSchema = new mongoose.Schema({
         type: Date,
         required: true
     }
-});
+}, { versionKey: false });
 
 const Suscription = mongoose.model('Suscription', subscriptionSchema);
 export default Suscription;

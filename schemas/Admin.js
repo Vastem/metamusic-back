@@ -13,7 +13,7 @@ const adminSchema = new mongoose.Schema({
         type: String,
         required: true
     }
-});
+}, { versionKey: false });
 
 const Admin = mongoose.model('Admin', adminSchema);
 export default Admin;

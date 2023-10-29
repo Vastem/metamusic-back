@@ -15,12 +15,13 @@ const playlistSchema = new mongoose.Schema({
     }],
     user: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'User',
+        required: true
     },
     image: {
         type: String
     }
-});
+}, { versionKey: false });
 
 const PlayList = mongoose.model('Playlist', playlistSchema);
 export default PlayList;
