@@ -45,7 +45,7 @@ export default class UserDAO {
         }
     }
 
-    async getID(id) {
+    async getById(id) {
         try {
             const user = await User.findById(new mongoose.Types.ObjectId(id));
             return user;

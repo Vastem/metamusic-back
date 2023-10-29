@@ -1,6 +1,6 @@
-//const Playlist = require('../schemas/Playlist');
 import DataAccesError from "../errors/DataAccesError";
 import { Playlist } from "../schemas/Playlist";
+import mongoose from "mongoose";
 
 export class PlaylistDAO {
     constructor() { }
@@ -17,7 +17,7 @@ export class PlaylistDAO {
 
     async update(id, playlistData) {
         try {
-            const playlist = await Playlist.findByIdAndUpdate(id, playlistData, { new: true });
+            const playlist = await Playlist.findByIdAndUpdate(new mongoose.Types.ObjectId(id), playlistData, { new: true });
             return playlist;
         } catch (error) {
             console.log(error);
@@ -27,7 +27,7 @@ export class PlaylistDAO {
 
     async delete(id) {
         try {
-            const playlist = await Playlist.findByIdAndRemove(id);
+            const playlist = await Playlist.findByIdAndRemove(new mongoose.Types.ObjectId(id));
             return playlist;
         } catch (error) {
             console.log(error);
@@ -45,10 +45,32 @@ export class PlaylistDAO {
         }
     }
 
-    async getID(id) {
+    async getById(id) {
         try {
-            const playlist = await Playlist.findById(id);
+            const playlist = await Playlist.findById(new mongoose.Types.ObjectId(id));
             return playlist;
+        } catch (error) {
+            console.log(error);
+            throw new DataAccesError("Lo sentimos, se ha producido un problema en la base de datos. Por favor, inténtelo de nuevo más tarde.")
+        }
+    }
+
+    async getByName(name){
+        try {
+            const regex = new RegExp(name, "i"); 
+            const playlists = await Playlist.find({ name: { $regex: regex } });
+            return playlists
+        } catch (error) {
+            console.log(error);
+            throw new DataAccesError("Lo sentimos, se ha producido un problema en la base de datos. Por favor, inténtelo de nuevo más tarde.")
+        }
+    }
+
+    async getByUser(user){
+        try {
+            const regex = new RegExp(user, "i"); 
+            const playlists = await Playlist.find({ user: { $regex: regex } });
+            return playlists
         } catch (error) {
             console.log(error);
             throw new DataAccesError("Lo sentimos, se ha producido un problema en la base de datos. Por favor, inténtelo de nuevo más tarde.")

@@ -2,6 +2,7 @@ import express from "express";
 import userRouter from "./routes/userRoutes.js";
 import songRouter from './routes/songRoutes.js'
 import adminRouter from './routes/adminRoutes.js'
+import suscriptionRouter from './routes/suscriptionRoutes.js'
 import { connectDatabase } from "./middlewares/connectDatabase.js";
 
 const app = express();
@@ -13,6 +14,7 @@ app.use("/", connectDatabase)
 app.use("/user", userRouter)
 app.use("/song", songRouter)
 app.use("/admin", adminRouter)
+app.use("/suscription", suscriptionRouter)
 
 
 

@@ -20,7 +20,7 @@ export function validateUpdateUserData(req, res, next) {
       new mongoose.Types.ObjectId(req.params.id)
     } catch (error) {
       console.log(error)
-      return res.status(400).json({ message: 'Se necesita el id del usuario' });
+      return res.status(400).json({ message: 'El id es inválido' });
     }
 
     if (!username || !email || !password) {

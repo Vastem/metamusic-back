@@ -44,7 +44,7 @@ export default class AdminDAO{
         }
     }
 
-    async getID(id){
+    async getById(id){
         try {
             const admin = await Admin.findById(new mongoose.Types.ObjectId(id))
             return admin
