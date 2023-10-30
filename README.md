@@ -1,7 +1,12 @@
 # Meta Music
 
+<div>
+<p style = 'text-align:center;'>
+<img src="/metaMusicLogo.png" alt="meta-music" width="400px">
+</p>
+</div>
+
 This is the API for an audio stream platfrom.
-![Meta Music logo](/meta-music.jpg)
 
 ## 💁‍♀️ How to install
 
