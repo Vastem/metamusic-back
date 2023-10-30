@@ -2,9 +2,10 @@
 
 <div>
 <p style = 'text-align:center;'>
-<img src="/metaMusicLogo.png" alt="meta-music" width="400px">
+<img src="/meta-logo.png" alt="meta-music" width="200px">
 </p>
 </div>
+
 
 This is the API for an audio stream platfrom.
 
