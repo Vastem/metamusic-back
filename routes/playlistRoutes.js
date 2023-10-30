@@ -9,6 +9,6 @@ router.delete("/:id", validatePlaylistId, deletePlaylist)
 router.put("/:id", validateUpdatePlaylistData, updatePlaylist)
 router.get("/:id", validatePlaylistId, getPlaylist)
 router.get("/search/byname/:name", getPlaylistsByName)
-router.post("/:id/songs", addSongToPlaylist)
+router.put("/addsong/:idplaylist", addSongToPlaylist)
 
 export default router

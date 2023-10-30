@@ -42,11 +42,11 @@ export default class PlaylistService {
         return playlists
     }
 
-    async addSongToPlaylist(id, songId) {
-        const playlist = await this.PlaylistDAO.getById(id)
+    async addSongToPlaylist(idplaylist, song) {
+        const playlist = await this.PlaylistDAO.getById(idplaylist)
         if (!playlist) throw new ValidationError('La playlist no existe.')
-        playlist.songs.push(songId)
-        const playlistUpdated = await this.PlaylistDAO.update(id, playlist.json())
+        playlist.songs.push(song)
+        const playlistUpdated = await this.PlaylistDAO.update(idplaylist, playlist)
         return playlistUpdated
     }
 

@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import Song from "./Song.js";
 
 const playlistSchema = new mongoose.Schema({
     name: {
@@ -9,10 +10,7 @@ const playlistSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    songs: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Song'
-    }],
+    songs: [Song.schema],
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
