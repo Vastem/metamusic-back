@@ -1,8 +1,8 @@
 import mongoose from "mongoose"
 
 export function validateAddPlaylistData(req, res, next) {
-    const { name, description, songs, user, image } = req.body
-    if (!name || !description || !songs || !user || !image) {
+    const { name, description, user, image } = req.body
+    if (!name || !description || !user || !image) {
         return res.status(400).json({ message: 'Todos los campos son obligatorios' })
     }
     if (typeof name !== 'string' || typeof description !== 'string' ||
