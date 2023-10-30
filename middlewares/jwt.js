@@ -2,11 +2,11 @@ import jwt from 'jsonwebtoken'
 import dotenv from "dotenv"
 dotenv.config();
 
-export async function generateToken(req) {
+export async function generateToken(user) {
     try {
         const payload = {
-            username: req.username,
-            email: req.email
+            username: user.username,
+            email: user.email
         }
         const token = await jwt.sign(payload, process.env.KEY, { expiresIn: '1h' });
         return token
