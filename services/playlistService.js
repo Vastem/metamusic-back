@@ -50,4 +50,11 @@ export default class PlaylistService {
         return playlistUpdated
     }
 
+    async removeSongFromPlaylist(idplaylist, idsong) {
+        const playlist = await this.PlaylistDAO.getById(idplaylist)
+        if (!playlist) throw new ValidationError('La playlist no existe.')
+        playlist.songs = playlist.songs.filter(song => song.idsong !== idsong)
+        const playlistUpdated = await this.PlaylistDAO.update(idplaylist, playlist)
+        return playlistUpdated
+    }
 }

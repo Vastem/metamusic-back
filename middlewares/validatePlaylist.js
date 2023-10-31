@@ -15,7 +15,7 @@ export function validateAddPlaylistData(req, res, next) {
 export function validateUpdatePlaylistData(req, res, next) {
     const { name, description, user, image } = req.body
     try {
-        new mongoose.Types.ObjectId(req.params.id)
+        new mongoose.Types.ObjectId(req.body.idplaylist)
     } catch (error) {
         return res.status(400).json({ message: 'El id de la playlist es inválido' })
     }

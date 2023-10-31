@@ -1,5 +1,5 @@
 import { Router } from "express"
-import { createPlaylist, deletePlaylist, getPlaylist, getPlaylists, updatePlaylist, getPlaylistsByName, addSongToPlaylist } from "../controllers/playlistController.js"
+import { createPlaylist, deletePlaylist, getPlaylist, getPlaylists, updatePlaylist, getPlaylistsByName, addSongToPlaylist, removeSongFromPlaylist } from "../controllers/playlistController.js"
 import { validateAddPlaylistData, validatePlaylistId, validateUpdatePlaylistData } from "../middlewares/validatePlaylist.js"
 const router = Router()
 
@@ -9,6 +9,7 @@ router.delete("/:id", validatePlaylistId, deletePlaylist)
 router.put("/:id", validateUpdatePlaylistData, updatePlaylist)
 router.get("/:id", validatePlaylistId, getPlaylist)
 router.get("/search/byname/:name", getPlaylistsByName)
-router.put("/addsong/:idplaylist", addSongToPlaylist)
+router.put("/update/addsong", addSongToPlaylist)
+router.put("/update/removesong", removeSongFromPlaylist)
 
 export default router
