@@ -10,7 +10,7 @@ router.delete("/:id", verifyToken, validatePlaylistId, deletePlaylist)
 router.put("/:id", verifyToken, validateUpdatePlaylistData, updatePlaylist)
 router.get("/:id", verifyToken, validatePlaylistId, getPlaylist)
 router.get("/search/byname/:name", verifyToken, getPlaylistsByName)
-router.put("/update/addsong", verifyToken, addSongToPlaylist)
-router.put("/update/removesong", verifyToken, removeSongFromPlaylist)
+router.put("/update/addsong/:idplaylist", verifyToken, addSongToPlaylist)
+router.put("/update/removesong/", verifyToken, removeSongFromPlaylist)
 
 export default router

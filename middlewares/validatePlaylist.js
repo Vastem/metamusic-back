@@ -6,7 +6,7 @@ export function validateAddPlaylistData(req, res, next) {
         return res.status(400).json({ message: 'Todos los campos son obligatorios' })
     }
     if (typeof name !== 'string' || typeof description !== 'string' ||
-        typeof user !== 'object' || typeof image !== 'string' || user.username !== 'string' || user.image !== 'string') {
+        typeof user !== 'object' || typeof image !== 'string' || typeof user.username !== 'string' || typeof user.image !== 'string') {
         return res.status(400).json({ message: 'El tipo de los datos es inválido.' })
     }
     next()
@@ -23,7 +23,7 @@ export function validateUpdatePlaylistData(req, res, next) {
         return res.status(400).json({ message: 'Todos los campos son obligatorios' })
     }
     if (typeof name !== 'string' || typeof description !== 'string' ||
-        typeof user !== 'object' || typeof image !== 'string' || user.username !== 'string' || user.image !== 'string') {
+        typeof user !== 'object' || typeof image !== 'string' || typeof user.username !== 'string' || typeof user.image !== 'string') {
         return res.status(400).json({ message: 'El tipo de los datos es inválido.' })
     }
     next()

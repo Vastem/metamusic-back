@@ -8,7 +8,7 @@ export async function generateToken(user) {
             username: user.username,
             email: user.email
         }
-        const token = await jwt.sign(payload, process.env.KEY, { expiresIn: '1h' });
+        const token = await jwt.sign(payload, process.env.KEY, { expiresIn: '12h' });
         return token
     } catch (error) {
         console.log(error)
