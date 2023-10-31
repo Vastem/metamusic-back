@@ -12,9 +12,13 @@ const playlistSchema = new mongoose.Schema({
     },
     songs: [Song.schema],
     user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-        required: true
+        username: {
+            type: String,
+            required: true
+        },
+        image: {
+            type: String
+        }
     },
     image: {
         type: String

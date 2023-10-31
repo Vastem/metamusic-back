@@ -11,7 +11,8 @@ export async function generateToken(user) {
         const token = await jwt.sign(payload, process.env.KEY, { expiresIn: '1h' });
         return token
     } catch (error) {
-        throw error;
+        console.log(error)
+        res.status(500).json({ message: 'Lo sentimos, ha ocurrido un error. Por favor, inténtelo de nuevo más tarde.' })
     }
     next()
 }
@@ -22,6 +23,6 @@ export async function verifyToken(req, res, next) {
         next()
     } catch (error) {
         console.log(error)
+        res.status(401).json({ message: 'No tienes permisos para realizar esta acción' })
     }
-
 }
