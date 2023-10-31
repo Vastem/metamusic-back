@@ -1,4 +1,5 @@
 import AdminService from "../services/adminService.js";
+import { generateToken } from "../middlewares/jwt.js";
 
 export async function createAdmin(req,res){
     const adminService = new AdminService()
@@ -6,6 +7,7 @@ export async function createAdmin(req,res){
         const admin = await adminService.createAdmin(req.body)
         res.status(200).json(admin)
     } catch (error) {
+        console.log(error)
         res.status(error.statusCode).json({message:error.message})
     }
 }
@@ -49,4 +51,16 @@ export async function getAdmin(req,res){
         res.status(error.statusCode).json(error.message)
     } 
 }
+
+export async function adminLogin(req,res){
+    const adminService = new AdminService()
+    try {
+        const admin = await adminService.login(req.body)
+        const token = await generateToken(admin)
+        res.set('authorization', `Bearer ${token}`)
+        res.status(200).json({admin, token})
+    } catch (error) {
+        res.status(error.statusCode).json(error.message)
+    }
+}	
 

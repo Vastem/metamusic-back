@@ -1,12 +1,14 @@
 import { Router } from 'express'
-import { login, createUser, deleteUser, updateUser, getUser, getUsers } from '../controllers/userController.js'
+import { createUser, deleteUser, updateUser, getUser, getUsers, userLogin } from '../controllers/userController.js'
 import { validateUserId, validateCreateUserData, validateLogin } from '../middlewares/ValidateUser.js'
-import { generateToken, verifyToken } from "../middlewares/jwt.js"
+import { verifyToken } from "../middlewares/jwt.js"
 const router = Router()
 
-
-router.post("/login", validateLogin, login)
+// No necesitan token
 router.post("/", validateCreateUserData, createUser)
+router.post("/login", validateLogin, userLogin)
+
+// Necesitan token
 router.get("/", verifyToken, getUsers)
 router.delete("/:id", verifyToken, validateUserId, deleteUser)
 router.put("/:id", verifyToken, validateUserId, updateUser)

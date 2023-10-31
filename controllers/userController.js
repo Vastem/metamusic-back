@@ -51,7 +51,7 @@ export async function getUser(req, res) {
     }
 }
 
-export async function login(req, res) {
+export async function userLogin(req, res) {
     const userService = new UserService()
     try {
         const user = await userService.login(req.body)

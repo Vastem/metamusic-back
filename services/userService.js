@@ -9,8 +9,8 @@ export default class UserService {
     async createUser(userData) {
         const usernameExist = await this.userDAO.getByUsername(userData.username)
         const emailExist = await this.userDAO.getByEmail(userData.email)
-        if (usernameExist) throw new ValidationError("El username ya está registrado")
-        if (emailExist) throw new ValidationError("El email ya está registrado")
+        if (usernameExist) throw new ValidationError("Ya existe un usuario con ese nombre de usuario.")
+        if (emailExist) throw new ValidationError("El email ya está registrado.")
         const user = await this.userDAO.create(userData);
         return user
     }
