@@ -56,8 +56,8 @@ export async function userLogin(req, res) {
     try {
         const user = await userService.login(req.body)
         const token = await generateToken(user)
-        res.set('authorization', `Bearer ${token}`)
-        res.status(200).json({ user, token })
+        res.set('Authorization', token)
+        res.status(200).json({ user })
     } catch (error) {
         console.log(error)
         res.status(error.statusCode).json(error.message)
