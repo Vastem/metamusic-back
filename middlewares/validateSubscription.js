@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-export function validateAddSuscriptionData(req, res, next) {
+export function validateAddSubscriptionData(req, res, next) {
     const { type, cost, startDate, dueDate } = req.body;
     if (!type || !cost || !startDate || !dueDate) {
         return res.status(400).json({ message: 'Todos los campos son obligatorios' });
@@ -17,7 +17,7 @@ export function validateAddSuscriptionData(req, res, next) {
     next();
 }
 
-export function validateUpdateSuscriptionData(req, res, next) {
+export function validateUpdateSubscriptionData(req, res, next) {
     const { type, cost, startDate, dueDate } = req.body;
 
     try {
@@ -41,7 +41,7 @@ export function validateUpdateSuscriptionData(req, res, next) {
     next();
 }
 
-export function validateSuscriptionId(req, res, next) {
+export function validateSubscriptionId(req, res, next) {
     try {
       new mongoose.Types.ObjectId(req.params.id)
     } catch (error) {

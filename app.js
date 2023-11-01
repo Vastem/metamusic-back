@@ -2,7 +2,7 @@ import express from "express";
 import userRouter from "./routes/userRoutes.js";
 import songRouter from './routes/songRoutes.js'
 import adminRouter from './routes/adminRoutes.js'
-import suscriptionRouter from './routes/suscriptionRoutes.js'
+import subscriptionRouter from './routes/subscriptionRoutes.js'
 import playlistRouter from './routes/playlistRoutes.js'
 import { connectDatabase } from "./middlewares/connectDatabase.js"
 
@@ -16,7 +16,7 @@ app.use("/", connectDatabase)
 app.use("/user", userRouter)
 app.use("/song", songRouter)
 app.use("/admin", adminRouter)
-app.use("/suscription", suscriptionRouter)
+app.use("/subscription", subscriptionRouter)
 app.use("/playlist", playlistRouter)
 
 app.use((req, res) => {

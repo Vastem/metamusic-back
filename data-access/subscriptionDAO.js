@@ -1,23 +1,23 @@
 import DataAccesError from "../errors/DataAccesError.js";
-import Suscription from "../schemas/Suscription.js";
+import Subscription from "../schemas/Subscription.js";
 import mongoose from "mongoose";
 
-export default class SuscriptionDAO{
+export default class SubscriptionDAO{
     constructor(){}
-    async create(suscriptionData){
+    async create(subscriptionData){
         try {
-            const suscription = new Suscription(suscriptionData)
-            return await suscription.save()
+            const subscription = new Suscription(subscriptionData)
+            return await subscription.save()
         } catch (error) {
             console.log(error)
             throw new DataAccesError("Lo sentimos, se ha producido un problema en la base de datos. Por favor, inténtelo de nuevo más tarde.")
         }
     }
 
-    async update(id, suscriptionData){
+    async update(id, subscriptionData){
         try {
-            const suscription = await Suscription.findByIdAndUpdate(new mongoose.Types.ObjectId(id), suscriptionData, {new: true})
-            return suscription
+            const subscription = await Subscription.findByIdAndUpdate(new mongoose.Types.ObjectId(id), subscriptionData, {new: true})
+            return subscription
         } catch (error) {
             console.log(error)
             throw new DataAccesError("Lo sentimos, se ha producido un problema en la base de datos. Por favor, inténtelo de nuevo más tarde.")
@@ -26,8 +26,8 @@ export default class SuscriptionDAO{
 
     async delete(id){
         try {
-            const suscription = await Suscription.findByIdAndRemove(new mongoose.Types.ObjectId(id))
-            return suscription
+            const subscription = await Subscription.findByIdAndRemove(new mongoose.Types.ObjectId(id))
+            return subscription
         } catch (error) {
             console.log(error)
             throw new DataAccesError("Lo sentimos, se ha producido un problema en la base de datos. Por favor, inténtelo de nuevo más tarde.")
@@ -36,8 +36,8 @@ export default class SuscriptionDAO{
 
     async get(limit = 10){
         try {
-            const suscriptions = await Suscription.find().limit(limit)
-            return suscriptions
+            const subscriptions = await Subscription.find().limit(limit)
+            return subscriptions
         } catch (error) {
             console.log(error)
             throw new DataAccesError("Lo sentimos, se ha producido un problema en la base de datos. Por favor, inténtelo de nuevo más tarde.")
@@ -46,8 +46,8 @@ export default class SuscriptionDAO{
 
     async getById(id){
         try {
-            const suscription = await Suscription.findById(new mongoose.Types.ObjectId(id))
-            return suscription
+            const subscription = await Subscription.findById(new mongoose.Types.ObjectId(id))
+            return subscription
         } catch (error) {
             console.log(error)
             throw new DataAccesError("Lo sentimos, se ha producido un problema en la base de datos. Por favor, inténtelo de nuevo más tarde.")
@@ -56,8 +56,8 @@ export default class SuscriptionDAO{
 
     async getByType(type){
         try {
-            const suscription = await Suscription.findOne({type});
-            return suscription;
+            const subscription = await Subscription.findOne({type});
+            return subscription;
           } catch (error) {
             console.log(error);
             throw new DataAccesError("Lo sentimos, se ha producido un problema en la base de datos. Por favor, inténtelo de nuevo más tarde.");
