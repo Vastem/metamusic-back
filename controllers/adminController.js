@@ -1,5 +1,5 @@
 import AdminService from "../services/adminService.js";
-import { generateToken } from "../middlewares/jwt.js";
+import { generateAdminToken } from "../middlewares/jwt.js";
 
 export async function createAdmin(req, res) {
     const adminService = new AdminService()
@@ -56,7 +56,7 @@ export async function adminLogin(req, res) {
     const adminService = new AdminService()
     try {
         const admin = await adminService.login(req.body)
-        const token = await generateToken(admin)
+        const token = await generateAdminToken(admin)
         res.set('Authorization', token)
         res.status(200).json({ admin })
     } catch (error) {

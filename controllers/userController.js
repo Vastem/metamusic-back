@@ -1,5 +1,5 @@
 import UserService from "../services/userService.js"
-import { generateToken } from "../middlewares/jwt.js"
+import { generateUserToken } from "../middlewares/jwt.js"
 
 export async function createUser(req, res) {
     const userService = new UserService()
@@ -34,7 +34,7 @@ export async function deleteUser(req, res) {
 export async function getUsers(req, res) {
     const userService = new UserService()
     try {
-        const users = userService.getUsers()
+        const users = await userService.getUsers()
         res.status(200).json(users)
     } catch (error) {
         res.status(error.statusCode).json(error.message)
@@ -55,7 +55,7 @@ export async function userLogin(req, res) {
     const userService = new UserService()
     try {
         const user = await userService.login(req.body)
-        const token = await generateToken(user)
+        const token = await generateUserToken(user)
         res.set('Authorization', token)
         res.status(200).json({ user })
     } catch (error) {

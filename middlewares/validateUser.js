@@ -56,3 +56,10 @@ export function validateUserId(req, res, next) {
 
   next();
 }
+
+export function verifyUser(req, res, next){
+  if( !res.locals.data || !res.locals.data.rol || res.locals.data.rol !== "user"){
+    return res.status(401).json({ message: 'No tienes permisos para realizar esta acción' });
+  }
+  next();
+}
