@@ -9,12 +9,8 @@ const subscriptionSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    startDate: {
-        type: Date,
-        required: true
-    },
-    dueDate: {
-        type: Date,
+    duration: {
+        type: Number,
         required: true
     }
 }, { versionKey: false });

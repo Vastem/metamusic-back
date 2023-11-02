@@ -13,5 +13,6 @@ router.get("/", verifyToken, verifyUser, getUsers)
 router.delete("/:id", verifyToken, verifyUser, validateUserId, deleteUser)
 router.put("/:id", verifyToken, verifyUser, validateUserId, updateUser)
 router.get("/:id", verifyToken, verifyUser, validateUserId, getUser)
+router.post("/subscribe", verifyToken, verifyUser)
 
 export default router

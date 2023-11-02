@@ -13,9 +13,19 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    suscription: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Suscription'
+    subscription: {
+        id: {
+            type: String,
+            required: true
+        },
+        startDate: {
+            type: Date,
+            required: true
+        },
+        expirationDate: {
+            type: Date,
+            required: true
+        }
     }
 }, { versionKey: false });
 

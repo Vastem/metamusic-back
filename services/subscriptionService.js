@@ -1,4 +1,5 @@
 import SubscriptionDAO from "../data-access/subscriptionDAO.js";
+import NoDataFoundError from "../errors/NoDataFoundError.js";
 import ValidationError from "../errors/ValidationError.js";
 
 export default class SubscriptionService{
@@ -15,14 +16,14 @@ export default class SubscriptionService{
 
     async updateSubscription(id, subscriptionData){
         const subscriptionToUpdate = await this.subscriptionDAO.getById(id)
-        if(!subscriptionToUpdate) throw new ValidationError("La suscripcion no existe")
+        if(!subscriptionToUpdate) throw new NoDataFoundError("La suscripcion no existe")
         const subscriptionUpdated = await this.subscriptionDAO.update(id, subscriptionData)
         return subscriptionUpdated
     }
 
     async deleteSubscription(id){
         const subscriptionDeleted = await this.subscriptionDAO.delete(id)
-        if(!subscriptionDeleted) throw new ValidationError("La suscripcion no existe")
+        if(!subscriptionDeleted) throw new NoDataFoundError("La suscripcion no existe")
         return subscriptionDeleted
     }
 
@@ -33,7 +34,7 @@ export default class SubscriptionService{
 
     async getSubscription(id){
         const subscription = await this.subscriptionDAO.getById(id)
-        if(!subscription) throw new ValidationError("La suscripcion no existe")
+        if(!subscription) throw new NoDataFoundError("La suscripcion no existe")
         return subscription
     }
 }

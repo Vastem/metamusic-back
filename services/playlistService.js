@@ -1,4 +1,5 @@
 import PlaylistDAO from '../data-access/playlistDAO.js'
+import NoDataFoundError from '../errors/NoDataFoundError.js'
 import ValidationError from '../errors/ValidationError.js'
 
 export default class PlaylistService {
@@ -15,14 +16,14 @@ export default class PlaylistService {
 
     async updatePlaylist(id, playlistData) {
         const playlistToUpdate = await this.PlaylistDAO.getById(id)
-        if (!playlistToUpdate) throw new ValidationError('La playlist no existe.')
+        if (!playlistToUpdate) throw new NoDataFoundError('La playlist no existe.')
         const playlistUpdated = await this.PlaylistDAO.update(id, playlistData)
         return playlistUpdated
     }
 
     async deletePlaylist(id) {
         const playlistDeleted = await this.PlaylistDAO.delete(id)
-        if (!playlistDeleted) throw new ValidationError('La playlist no existe.')
+        if (!playlistDeleted) throw new NoDataFoundError('La playlist no existe.')
         return playlistDeleted
     }
 
@@ -33,7 +34,7 @@ export default class PlaylistService {
 
     async getPlaylist(id) {
         const playlist = await this.PlaylistDAO.getById(id)
-        if (!playlist) throw new ValidationError('La playlist no existe.')
+        if (!playlist) throw new NoDataFoundError('La playlist no existe.')
         return playlist
     }
 
@@ -44,7 +45,7 @@ export default class PlaylistService {
 
     async addSongToPlaylist(idplaylist, song) {
         const playlist = await this.PlaylistDAO.getById(idplaylist)
-        if (!playlist) throw new ValidationError('La playlist no existe.')
+        if (!playlist) throw new NoDataFoundError('La playlist no existe.')
         playlist.songs.push(song)
         const playlistUpdated = await this.PlaylistDAO.update(idplaylist, playlist)
         return playlistUpdated
@@ -52,7 +53,7 @@ export default class PlaylistService {
 
     async removeSongFromPlaylist(idplaylist, idsong) {
         const playlist = await this.PlaylistDAO.getById(idplaylist)
-        if (!playlist) throw new ValidationError('La playlist no existe.')
+        if (!playlist) throw new NoDataFoundError('La playlist no existe.')
         playlist.songs = playlist.songs.filter(song => song.idsong !== idsong)
         const playlistUpdated = await this.PlaylistDAO.update(idplaylist, playlist)
         return playlistUpdated

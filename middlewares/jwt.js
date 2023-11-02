@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken'
 import dotenv from "dotenv"
+import InternalServerError from '../errors/InternalServerError';
 dotenv.config();
 
 export async function generateUserToken(user) {
@@ -14,7 +15,7 @@ export async function generateUserToken(user) {
         return token
     } catch (error) {
         console.log(error)
-        res.status(500).json({ message: 'Lo sentimos, ha ocurrido un error. Por favor, inténtelo de nuevo más tarde.' })
+        throw new InternalServerError("Lo sentimos, ha ocurrido un error. Por favor, inténtelo de nuevo más tarde.")
     }
     next()
 }
@@ -30,9 +31,18 @@ export function generateAdminToken(admin) {
         return token
     } catch (error) {
         console.log(error)
-        res.status(500).json({ message: 'Lo sentimos, ha ocurrido un error. Por favor, inténtelo de nuevo más tarde.' })
+        throw new InternalServerError("Lo sentimos, ha ocurrido un error. Por favor, inténtelo de nuevo más tarde.")
     }
     next()
+}
+
+export function generateSubscriptionToken(userSubscribedData){
+    try {
+        //TODO: Crear payload con los datos del usuario
+    } catch (error) {
+        console.log(error)
+        throw new InternalServerError("Lo sentimos, ha ocurrido un error. Por favor, inténtelo de nuevo más tarde.")
+    }
 }
 
 export async function verifyToken(req, res, next) {

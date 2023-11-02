@@ -1,4 +1,5 @@
 import SongDAO from "../data-access/songDAO.js";
+import NoDataFoundError from "../errors/NoDataFoundError.js";
 import ValidationError from "../errors/ValidationError.js";
 
 export default class SongService{
@@ -15,14 +16,14 @@ export default class SongService{
 
     async updateSong(id, songData){
         const songToUpdate = await this.songDAO.getById(id)
-        if(!songToUpdate ) throw new ValidationError("La canción no existe.")
+        if(!songToUpdate ) throw new NoDataFoundError("La canción no existe.")
         const songUpdated = await this.songDAO.update(id, songData)
         return songUpdated
     }
 
     async deleteSong(id){
         const songDeleted = await this.songDAO.delete(id)
-        if(!songDeleted) throw new ValidationError("La canción no existe.")
+        if(!songDeleted) throw new NoDataFoundError("La canción no existe.")
         return songDeleted
     }
 
@@ -33,7 +34,7 @@ export default class SongService{
 
     async getSong(id){
         const song = await this.songDAO.getById(id)
-        if(!song) throw new ValidationError("La canción no existe.")
+        if(!song) throw new NoDataFoundError("La canción no existe.")
         return song
     }
 
