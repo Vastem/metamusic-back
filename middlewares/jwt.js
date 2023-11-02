@@ -9,7 +9,7 @@ export function generateUserToken(user) {
             username: user.username,
             email: user.email,
             rol: "user",
-            subscription: null
+            subscription: user.subscription
         }
         const token = jwt.sign(payload, process.env.KEY, { expiresIn: '12h' });
         return token
@@ -34,7 +34,7 @@ export function generateAdminToken(admin) {
     }
 }
 
-export function generateSubscriptionToken({username, email, subscription}){
+export function generateSubscriptionToken({ username, email, subscription }) {
     try {
         const payload = {
             username: username,
