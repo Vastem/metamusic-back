@@ -65,6 +65,7 @@ The metamusic-back provides the following endpoints:
 - `GET /user/:id`: Retrieves user by ID.
 - `PUT /user/:id`: Updates user information by ID.
 - `DELETE /user/:id`: Delete users by ID.
+- `POST /user/subscribe`: Subscribe a user for a period of time and generate a token
 
 - `POST /song`: Creates a new song.
 - `GET /song`: Retrieves all songs.

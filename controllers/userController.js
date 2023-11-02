@@ -1,5 +1,5 @@
 import UserService from "../services/userService.js"
-import { generateUserToken } from "../middlewares/jwt.js"
+import { generateSubscriptionToken, generateUserToken } from "../middlewares/jwt.js"
 
 export async function createUser(req, res) {
     const userService = new UserService()
@@ -55,9 +55,9 @@ export async function userLogin(req, res) {
     const userService = new UserService()
     try {
         const user = await userService.login(req.body)
-        const token = await generateUserToken(user)
+        const token = generateUserToken(user)
         res.set('Authorization', token)
-        res.status(200).json({ user })
+        res.status(200).json(user)
     } catch (error) {
         console.log(error)
         res.status(error.statusCode).json(error.message)
@@ -68,6 +68,8 @@ export async function toSubscribe(req, res) {
     const userService = new UserService()
     try {
         const user = await userService.toSubscribe(req.body)
+        const token = generateSubscriptionToken(user)
+        res.set('Authorization', token)
         res.status(200).json(user)
     } catch (error) {
         res.status(error.statusCode).json(error.message)

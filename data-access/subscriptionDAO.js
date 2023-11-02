@@ -6,7 +6,7 @@ export default class SubscriptionDAO{
     constructor(){}
     async create(subscriptionData){
         try {
-            const subscription = new Suscription(subscriptionData)
+            const subscription = new Subscription(subscriptionData)
             return await subscription.save()
         } catch (error) {
             console.log(error)

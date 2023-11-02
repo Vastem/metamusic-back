@@ -10,10 +10,6 @@ export function validateAddSubscriptionData(req, res, next) {
         return res.status(400).json({ message: 'Tipos de datos incorrecto.' });
     }
 
-    if (!isValidDate(startDate) || !isValidDate(dueDate)) {
-        return res.status(400).json({ message: 'Las fechas no son válidas.' });
-    } 
-
     next();
 }
 

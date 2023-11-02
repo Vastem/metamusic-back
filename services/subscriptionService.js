@@ -8,7 +8,7 @@ export default class SubscriptionService{
     }
 
     async createSubscription(subscriptionData){
-        const subscriptionExist = await this.subscriptionDAO.getByType(suscriptionData.type)
+        const subscriptionExist = await this.subscriptionDAO.getByType(subscriptionData.type)
         if(subscriptionExist) throw new ValidationError("Este tipo de suscripcion ya existe")
         const subscription = await this.subscriptionDAO.create(subscriptionData)
         return subscription

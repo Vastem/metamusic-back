@@ -3,7 +3,7 @@ import dotenv from "dotenv"
 import InternalServerError from '../errors/InternalServerError.js';
 dotenv.config();
 
-export async function generateUserToken(user) {
+export function generateUserToken(user) {
     try {
         const payload = {
             username: user.username,
@@ -11,7 +11,7 @@ export async function generateUserToken(user) {
             rol: "user",
             subscription: null
         }
-        const token = await jwt.sign(payload, process.env.KEY, { expiresIn: '12h' });
+        const token = jwt.sign(payload, process.env.KEY, { expiresIn: '12h' });
         return token
     } catch (error) {
         console.log(error)
@@ -34,7 +34,7 @@ export function generateAdminToken(admin) {
     }
 }
 
-export async function generateSubscriptionToken({username, email, subscription}){
+export function generateSubscriptionToken({username, email, subscription}){
     try {
         const payload = {
             username: username,
@@ -46,7 +46,7 @@ export async function generateSubscriptionToken({username, email, subscription})
                 expirationDate: subscription.expirationDate
             }
         }
-        const token = await jwt.sign(payload, process.env.KEY, { expiresIn: '12h' });
+        const token = jwt.sign(payload, process.env.KEY, { expiresIn: '12h' });
         return token
     } catch (error) {
         console.log(error)
@@ -54,13 +54,17 @@ export async function generateSubscriptionToken({username, email, subscription})
     }
 }
 
-export async function verifyToken(req, res, next) {
+export function verifyToken(req, res, next) {
+    if (!req.headers.authorization) {
+        console.log("[UNAUTHORIZED] No se ha enviado el token.")
+        return res.status(401).json({ message: 'No tienes permisos para realizar esta acción' })
+    }
     try {
-        const decoded = await jwt.verify(req.headers.authorization, process.env.KEY);
-        res.locals.data = decoded
+        const tokenData = jwt.verify(req.headers.authorization, process.env.KEY);
+        res.locals.data = tokenData
         next()
     } catch (error) {
-        console.log(error)
-        res.status(401).json({ message: 'No tienes permisos para realizar esta acción' })
+        console.log("[UNAUTHORIZED] Token inválido o sesión expirada.")
+        res.status(401).json({ message: 'Su sesión a expirado.' })
     }
 }

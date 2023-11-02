@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import { createUser, deleteUser, updateUser, getUser, getUsers, userLogin, toSubscribe } from '../controllers/userController.js'
-import { validateUserId, validateCreateUserData, validateLogin, verifyUser, verifySubscription } from '../middlewares/validateUser.js'
+import { validateUserId, validateCreateUserData, validateLogin, verifyUser, verifySubscription, validateUserSubscriptionData } from '../middlewares/validateUser.js'
 import { verifyToken } from "../middlewares/jwt.js"
 const router = Router()
 
@@ -13,6 +13,6 @@ router.get("/", verifyToken, verifyUser, getUsers)
 router.delete("/:id", verifyToken, verifyUser, validateUserId, deleteUser)
 router.put("/:id", verifyToken, verifyUser, validateUserId, updateUser)
 router.get("/:id", verifyToken, verifyUser, validateUserId, getUser)
-router.post("/subscribe", verifyToken, verifyUser, verifySubscription, toSubscribe)
+router.post("/subscribe", verifyToken, verifyUser, validateUserSubscriptionData, toSubscribe)
 
 export default router

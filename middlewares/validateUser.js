@@ -57,20 +57,40 @@ export function validateUserId(req, res, next) {
   next();
 }
 
+export function validateUserSubscriptionData(req, res, next){
+  const { iduser, idsubscription } = req.body;
+  if(!iduser || !idsubscription){
+    return res.status(400).json({ message: 'Todos los campos son obligatorios' });
+  }
+
+  try {
+    new mongoose.Types.ObjectId(iduser)
+    new mongoose.Types.ObjectId(idsubscription)
+  } catch (error) {
+    return res.status(400).json({ message: 'Los ids son inválidos' });
+  }
+
+  next();
+}
+
 export function verifyUser(req, res, next){
   if( !res.locals.data || !res.locals.data.rol || res.locals.data.rol !== "user"){
+    console.log("[UNAUTHORIZED] No es un usuario.")
     return res.status(401).json({ message: 'No tienes permisos para realizar esta acción' });
   }
+  res.locals.data = res.locals.data
   next();
 }
 
 export function verifySubscription(req, res, next){
-  if(!res.locals.data.suscription || !res.locals.data.subscription.expirationDate){
+  if(!res.locals.data.subscription || !res.locals.data.subscription.expirationDate){
+    console.log("[UNAUTHORIZED] No tiene suscripcion.")
     return res.status(401).json({ message: 'No tienes permisos para realizar esta acción' });
   }
 
   if(hasSubscriptionExpired(res.locals.data.subscription.expirationDate)){
-    return res.status(403).json({ message: 'Tu suscripcion ha expirado.' });
+    console.log("[UNAUTHORIZED] Suscripcion expirada.")
+    return res.status(403).json({ message: 'Tu suscripción ha expirado.' });
   }
 
   next();

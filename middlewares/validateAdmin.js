@@ -46,6 +46,7 @@ export function validateAdminId(req, res, next) {
 
 export function verifyAdmin(req, res, next){
   if(!res.locals.data || !res.locals.data.rol || res.locals.data.rol !== "admin"){
+    console.log("[UNAUTHORIZED] No es un administrador.")
     return res.status(401).json({ message: 'No tienes permisos para realizar esta acción' });
   }
   next();

@@ -20,7 +20,7 @@ app.use("/subscription", subscriptionRouter)
 app.use("/playlist", playlistRouter)
 
 app.use((req, res) => {
-    res.status(404).send("Not found")
+    res.status(404).send({message: "NOT FOUND"})
 })
 
 const PORT = process.env.PORT || 3000;
