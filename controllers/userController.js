@@ -67,7 +67,7 @@ export async function userLogin(req, res) {
 export async function toSubscribe(req, res) {
     const userService = new UserService()
     try {
-        const user = await userService.toSubscripe(req.body)
+        const user = await userService.toSubscribe(req.body)
         res.status(200).json(user)
     } catch (error) {
         res.status(error.statusCode).json(error.message)

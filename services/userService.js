@@ -49,7 +49,7 @@ export default class UserService {
         return user
     }
 
-    async toSubscripe(subscriptionData){
+    async toSubscribe(subscriptionData){
         const user = await this.userDAO.getById(subscriptionData.iduser)
         if(!user) throw new NoDataFoundError("El usuario no existe")
         const subscription = await this.subscriptionDAO.getById(subscriptionData.idsubscription)

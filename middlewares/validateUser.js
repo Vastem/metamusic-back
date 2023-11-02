@@ -63,3 +63,27 @@ export function verifyUser(req, res, next){
   }
   next();
 }
+
+export function verifySubscription(req, res, next){
+  if(!res.locals.data.suscription || !res.locals.data.subscription.expirationDate){
+    return res.status(401).json({ message: 'No tienes permisos para realizar esta acción' });
+  }
+
+  if(hasSubscriptionExpired(res.locals.data.subscription.expirationDate)){
+    return res.status(403).json({ message: 'Tu suscripcion ha expirado.' });
+  }
+
+  next();
+}
+
+function hasSubscriptionExpired(expirationDate) {
+  const currentDate = new Date();
+
+  if (expirationDate < currentDate) {
+      // La suscripción ha expirado
+      return true;
+  } else {
+      // La suscripción aún es válida
+      return false;
+  }
+}

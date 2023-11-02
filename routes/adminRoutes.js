@@ -2,7 +2,7 @@ import { Router } from "express";
 import { getAdmin, getAdmins, createAdmin, deleteAdmin, updateAdmin, adminLogin } from "../controllers/adminController.js";
 import {validateCreateAdminData, validateUpdateAdminData, validateAdminId, verifyAdmin} from "../middlewares/validateAdmin.js";
 import { verifyToken } from "../middlewares/jwt.js";
-import { validateLogin } from "../middlewares/ValidateUser.js";
+import { validateLogin } from "../middlewares/validateUser.js";
 const router = Router()
 
 // No necesitan token
