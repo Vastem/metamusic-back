@@ -9,6 +9,10 @@ export function validateAddPlaylistData(req, res, next) {
         typeof user !== 'object' || typeof image !== 'string' || typeof user.username !== 'string' || typeof user.image !== 'string') {
         return res.status(400).json({ message: 'El tipo de los datos es inválido.' })
     }
+    console.log(res.locals.data.subscription)
+    if (res.locals.data.subscription.type === 'free' /* && user.playlist.length >= 1 */) {
+        return res.status(400).json({ message: 'No puedes crear playlists' })
+    }
     next()
 }
 

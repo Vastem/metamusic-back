@@ -57,9 +57,9 @@ export function validateUserId(req, res, next) {
   next();
 }
 
-export function validateUserSubscriptionData(req, res, next){
+export function validateUserSubscriptionData(req, res, next) {
   const { iduser, idsubscription } = req.body;
-  if(!iduser || !idsubscription){
+  if (!iduser || !idsubscription) {
     return res.status(400).json({ message: 'Todos los campos son obligatorios' });
   }
 
@@ -73,8 +73,8 @@ export function validateUserSubscriptionData(req, res, next){
   next();
 }
 
-export function verifyUser(req, res, next){
-  if( !res.locals.data || !res.locals.data.rol || res.locals.data.rol !== "user"){
+export function verifyUser(req, res, next) {
+  if (!res.locals.data || !res.locals.data.rol || res.locals.data.rol !== "user") {
     console.log("[UNAUTHORIZED] No es un usuario.")
     return res.status(401).json({ message: 'No tienes permisos para realizar esta acción' });
   }
@@ -82,13 +82,14 @@ export function verifyUser(req, res, next){
   next();
 }
 
-export function verifySubscription(req, res, next){
-  if(!res.locals.data.subscription || !res.locals.data.subscription.expirationDate){
+export function verifySubscription(req, res, next) {
+  if (!res.locals.data.subscription || !res.locals.data.subscription.expirationDate) {
+    console.log(res.locals)
     console.log("[UNAUTHORIZED] No tiene suscripcion.")
     return res.status(401).json({ message: 'No tienes permisos para realizar esta acción' });
   }
 
-  if(hasSubscriptionExpired(res.locals.data.subscription.expirationDate)){
+  if (hasSubscriptionExpired(res.locals.data.subscription.expirationDate)) {
     console.log("[UNAUTHORIZED] Suscripcion expirada.")
     return res.status(403).json({ message: 'Tu suscripción ha expirado.' });
   }
@@ -100,10 +101,10 @@ function hasSubscriptionExpired(expirationDate) {
   const currentDate = new Date();
 
   if (expirationDate < currentDate) {
-      // La suscripción ha expirado
-      return true;
+    // La suscripción ha expirado
+    return true;
   } else {
-      // La suscripción aún es válida
-      return false;
+    // La suscripción aún es válida
+    return false;
   }
 }
