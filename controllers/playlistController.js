@@ -60,6 +60,16 @@ export async function getPlaylistsByName(req, res) {
     }
 }
 
+export async function getPlaylistsByUser(req, res) {
+    const playlistService = new PlaylistService()
+    try {
+        const playlists = await playlistService.getPlaylistsByUser(req.params.user)
+        res.status(200).json(playlists)
+    } catch (error) {
+        res.status(error.statusCode).json(error.message)
+    }
+}
+
 export async function addSongToPlaylist(req, res) {
     const playlistService = new PlaylistService()
     try {

@@ -43,6 +43,11 @@ export default class PlaylistService {
         return playlists
     }
 
+    async getPlaylistsByUser(user) {
+        const playlists = await this.PlaylistDAO.getByUser(user)
+        return playlists
+    }
+
     async addSongToPlaylist(idplaylist, song) {
         const playlist = await this.PlaylistDAO.getById(idplaylist)
         if (!playlist) throw new NoDataFoundError('La playlist no existe.')

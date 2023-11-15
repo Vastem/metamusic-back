@@ -54,6 +54,25 @@ export function generateSubscriptionToken({ username, email, subscription }) {
     }
 }
 
+export function authenticated(req, res, next) {
+    if (!req.cookies.authToken) {
+        return res.json({ isAuthenticated: false })
+    }
+    try {
+        jwt.verify(req.cookies.authToken, process.env.KEY, (err, decoded) => {
+            if (err) {
+                // Si hay un error al verificar el token, envía una respuesta indicando que el usuario no está autenticado
+                res.json({ isAuthenticated: false });
+            } else {
+                // Si el token es válido, envía una respuesta indicando que el usuario está autenticado
+                res.json({ isAuthenticated: true, username: decoded.username });
+            }
+        })
+    } catch (error) {
+        res.status(401).json({ isAuthenticated: false, message: 'Su sesión a expirado.' })
+    }
+}
+
 export function verifyToken(req, res, next) {
     if (!req.headers.authorization) {
         console.log("[UNAUTHORIZED] No se ha enviado el token.")

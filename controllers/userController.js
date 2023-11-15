@@ -11,6 +11,16 @@ export async function createUser(req, res) {
     }
 }
 
+export async function authenticated(req, res) {
+    console.log('entro')
+    try {
+        console.log(req.cookies)
+        res.status(200).json({ message: "OK" })
+    } catch (error) {
+        res.status(error.statusCode).json(error.message)
+    }
+}
+
 export async function updateUser(req, res) {
     const userService = new UserService()
     try {
@@ -56,8 +66,8 @@ export async function userLogin(req, res) {
     try {
         const user = await userService.login(req.body)
         const token = generateUserToken(user)
-        res.set('Authorization', token)
-        res.status(200).json(user)
+        res.cookie('authToken', token, { httpOnly: false })
+        res.json({ success: true });
     } catch (error) {
         console.log(error)
         res.status(error.statusCode).json(error.message)
