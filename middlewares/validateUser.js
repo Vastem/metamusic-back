@@ -83,16 +83,16 @@ export function verifyUser(req, res, next) {
 }
 
 export function verifySubscription(req, res, next) {
-  if (!res.locals.data.subscription || !res.locals.data.subscription.expirationDate) {
-    console.log(res.locals)
-    console.log("[UNAUTHORIZED] No tiene suscripcion.")
-    return res.status(401).json({ message: 'No tienes permisos para realizar esta acción' });
-  }
-
-  if (hasSubscriptionExpired(res.locals.data.subscription.expirationDate)) {
-    console.log("[UNAUTHORIZED] Suscripcion expirada.")
-    return res.status(403).json({ message: 'Tu suscripción ha expirado.' });
-  }
+  /*   if (!res.locals.data.subscription || !res.locals.data.subscription.expirationDate) {
+      console.log(res.locals)
+      console.log("[UNAUTHORIZED] No tiene suscripcion.")
+      return res.status(401).json({ message: 'No tienes permisos para realizar esta acción' });
+    }
+  
+    if (hasSubscriptionExpired(res.locals.data.subscription.expirationDate)) {
+      console.log("[UNAUTHORIZED] Suscripcion expirada.")
+      return res.status(403).json({ message: 'Tu suscripción ha expirado.' });
+    } */
 
   next();
 }

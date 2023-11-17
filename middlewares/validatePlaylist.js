@@ -1,18 +1,19 @@
 import mongoose from "mongoose"
 
 export function validateAddPlaylistData(req, res, next) {
-    const { name, description, user, image } = req.body
-    if (!name || !description || !user || !image || !user.username || !user.image) {
+    const { name, description, user } = req.body
+    if (!name || !description || !user | !user.username) {
         return res.status(400).json({ message: 'Todos los campos son obligatorios' })
     }
     if (typeof name !== 'string' || typeof description !== 'string' ||
-        typeof user !== 'object' || typeof image !== 'string' || typeof user.username !== 'string' || typeof user.image !== 'string') {
+        typeof user !== 'object') {
         return res.status(400).json({ message: 'El tipo de los datos es inválido.' })
     }
     console.log(res.locals.data.subscription)
-    if (res.locals.data.subscription.type === 'free' /* && user.playlist.length >= 1 */) {
+    /* if (res.locals.data.subscription.type === 'free' ) {
         return res.status(400).json({ message: 'No puedes crear playlists' })
-    }
+    } */
+
     next()
 }
 

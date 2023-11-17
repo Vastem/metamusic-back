@@ -6,8 +6,8 @@ import { verifyAdmin } from "../middlewares/validateAdmin.js";
 const router = Router()
 
 router.post("/", verifyToken, verifyAdmin, validateAddSongData, addSong)
-router.get("/", verifyToken, getSongs)
-router.delete("/:id",verifyToken, verifyAdmin, validateSongId, deleteSong)
+router.get("/", getSongs)
+router.delete("/:id", verifyToken, verifyAdmin, validateSongId, deleteSong)
 router.put("/:id", verifyToken, verifyAdmin, validateUpdateSongData, updateSong)
 router.get("/:id", verifyToken, validateSongId, getSong)
 router.get("/search/byname/:name", verifyToken, getSongByName)

@@ -15,20 +15,16 @@ const userSchema = new mongoose.Schema({
     },
     subscription: {
         id: {
-            type: String,
-            required: true
+            type: String
         },
         type: {
-            type: String,
-            required: true
+            type: String
         },
         startDate: {
-            type: Date,
-            required: true
+            type: Date
         },
         expirationDate: {
-            type: Date,
-            required: true
+            type: Date
         }
     }
 }, { versionKey: false });

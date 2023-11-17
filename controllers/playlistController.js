@@ -4,9 +4,9 @@ export async function createPlaylist(req, res) {
     const playlistService = new PlaylistService()
     try {
         const playlist = await playlistService.addPlaylist(req.body)
-        res.status(200).json(playlist)
+        res.status(200).json({ success: true, playlist: playlist }) // TODO: Cambiar esto
     } catch (error) {
-        res.status(error.statusCode).json({ message: error.message })
+        res.status(error.statusCode).json({ success: false, message: error.message })
     }
 }
 

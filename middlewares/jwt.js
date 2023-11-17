@@ -74,12 +74,12 @@ export function authenticated(req, res, next) {
 }
 
 export function verifyToken(req, res, next) {
-    if (!req.headers.authorization) {
+    if (!req.cookies.authToken) {
         console.log("[UNAUTHORIZED] No se ha enviado el token.")
         return res.status(401).json({ message: 'No tienes permisos para realizar esta acción' })
     }
     try {
-        const tokenData = jwt.verify(req.headers.authorization, process.env.KEY);
+        const tokenData = jwt.verify(req.cookies.authToken, process.env.KEY);
         res.locals.data = tokenData
         next()
     } catch (error) {
