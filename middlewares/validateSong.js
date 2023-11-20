@@ -6,7 +6,7 @@ export function validateAddSongData(req, res, next) {
       return res.status(400).json({ message: 'Todos los campos son obligatorios' });
     }
 
-    if (typeof idsong !== 'number' || typeof name !== 'string' || typeof album !== 'string' || typeof duration !== 'number' || 
+    if (typeof idsong !== 'string' || typeof name !== 'string' || typeof album !== 'string' || typeof duration !== 'number' || 
         typeof singers !== 'string' || typeof image !== 'string') {
         return res.status(400).json({ message: 'El tipo de los datos es inválido.' });
     }
@@ -28,7 +28,7 @@ export function validateUpdateSongData(req, res, next) {
       return res.status(400).json({ message: 'Todos los campos son obligatorios' });
     }
 
-    if (typeof idsong !== 'number' || typeof name !== 'string' || typeof album !== 'string' || typeof duration !== 'number' || 
+    if (typeof idsong !== 'string' || typeof name !== 'string' || typeof album !== 'string' || typeof duration !== 'number' || 
         typeof singers !== 'string' || typeof image !== 'string') {
         return res.status(400).json({ message: 'El tipo de los datos es inválido.' });
     }
