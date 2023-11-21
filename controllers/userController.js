@@ -74,6 +74,15 @@ export async function userLogin(req, res) {
     }
 }
 
+export async function userLogout(req, res) {
+    try {
+        res.clearCookie('authToken');
+        res.json({ success: true });
+    } catch (error) {
+        res.status(error.statusCode).json({ success: true, message: error.message })
+    }
+}
+
 export async function toSubscribe(req, res) {
     const userService = new UserService()
     try {
