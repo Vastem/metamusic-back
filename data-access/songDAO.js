@@ -37,7 +37,7 @@ export default class SongDAO {
 
     async get(limit = 10) {
         try {
-            const songs = await Song.find().limit(limit);
+            const songs = await Song.find();
             return songs;
         } catch (error) {
             console.log(error);
@@ -55,9 +55,9 @@ export default class SongDAO {
         }
     }
 
-    async getByIdSong(idsong){
+    async getByIdSong(idsong) {
         try {
-            const song = await Song.findOne({idsong})
+            const song = await Song.findOne({ idsong })
             return song
         } catch (error) {
             console.log(error);
@@ -65,9 +65,9 @@ export default class SongDAO {
         }
     }
 
-    async getByName(name){
+    async getByName(name) {
         try {
-            const regex = new RegExp(name, "i"); 
+            const regex = new RegExp(name, "i");
             const songs = await Song.find({ name: { $regex: regex } });
             return songs
         } catch (error) {
@@ -76,9 +76,9 @@ export default class SongDAO {
         }
     }
 
-    async getBySingers(singers){
+    async getBySingers(singers) {
         try {
-            const regex = new RegExp(singers, "i"); 
+            const regex = new RegExp(singers, "i");
             const songs = await Song.find({ singers: { $regex: regex } });
             return songs
         } catch (error) {
@@ -87,9 +87,9 @@ export default class SongDAO {
         }
     }
 
-    async getByAlbum(album){
+    async getByAlbum(album) {
         try {
-            const regex = new RegExp(album, "i"); 
+            const regex = new RegExp(album, "i");
             const songs = await Song.find({ album: { $regex: regex } });
             return songs
         } catch (error) {
