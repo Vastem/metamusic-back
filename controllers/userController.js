@@ -84,11 +84,12 @@ export async function userLogout(req, res) {
 }
 
 export async function toSubscribe(req, res) {
+    const userId = res.locals.data.userid
     const userService = new UserService()
     try {
-        const user = await userService.toSubscribe(req.body)
+        const user = await userService.toSubscribe(userId, req.body.idsubscription)
         const token = generateSubscriptionToken(user)
-        res.set('Authorization', token)
+        res.cookie('authToken', token, { httpOnly: false })
         res.status(200).json(user)
     } catch (error) {
         res.status(error.statusCode).json(error.message)

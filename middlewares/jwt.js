@@ -6,6 +6,7 @@ dotenv.config();
 export function generateUserToken(user) {
     try {
         const payload = {
+            userId: user._id,
             username: user.username,
             email: user.email,
             rol: "user",
@@ -22,6 +23,7 @@ export function generateUserToken(user) {
 export function generateAdminToken(admin) {
     try {
         const payload = {
+            adminId: admin._id,
             username: admin.username,
             email: admin.email,
             rol: "admin"
@@ -34,9 +36,10 @@ export function generateAdminToken(admin) {
     }
 }
 
-export function generateSubscriptionToken({ username, email, subscription }) {
+export function generateSubscriptionToken({ username, email, subscription, _id }) {
     try {
         const payload = {
+            userId: _id,
             username: username,
             email: email,
             rol: "user",

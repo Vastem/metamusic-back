@@ -10,7 +10,7 @@ router.get("/", getSongs)
 router.delete("/:id", verifyToken, verifyAdmin, validateSongId, deleteSong)
 router.put("/:id", verifyToken, verifyAdmin, validateUpdateSongData, updateSong)
 router.get("/:id", verifyToken, validateSongId, getSong)
-router.get("/search/byname/:name", getSongByName)
+router.get("/search/byname/:name", verifyToken, validateSongId, getSongByName)
 router.get("/search/byalbum/:album", verifyToken, getSongByAlbum)
 router.get("/search/bysingers/:singers", verifyToken, getSongBySingers)
 

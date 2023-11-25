@@ -10,7 +10,7 @@ router.post("/login", validateLogin, userLogin)
 router.get("/is-authenticated", authenticated)
 
 // Necesitan token
-router.post("/logout", verifyToken, userLogout)
+router.post("/logout",  userLogout)
 router.get("/", verifyToken, verifyUser, getUsers)
 router.delete("/:id", verifyToken, verifyUser, validateUserId, deleteUser)
 router.put("/:id", verifyToken, verifyUser, validateUserId, updateUser)

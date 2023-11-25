@@ -49,10 +49,10 @@ export default class UserService {
         return user
     }
 
-    async toSubscribe(subscriptionData){
-        const user = await this.userDAO.getById(subscriptionData.iduser)
+    async toSubscribe(userId, subscriptionId) {
+        const user = await this.userDAO.getById(userId)
         if(!user) throw new NoDataFoundError("El usuario no existe")
-        const subscription = await this.subscriptionDAO.getById(subscriptionData.idsubscription)
+        const subscription = await this.subscriptionDAO.getById(subscriptionId)
         if(!subscription) throw new NoDataFoundError("La suscripción no existe")
 
         // Establecer la fecha de inicio y de fin de la suscripción

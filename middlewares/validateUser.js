@@ -58,13 +58,13 @@ export function validateUserId(req, res, next) {
 }
 
 export function validateUserSubscriptionData(req, res, next) {
-  const { iduser, idsubscription } = req.body;
-  if (!iduser || !idsubscription) {
+  console.log(req.body)
+  const { idsubscription } = req.body;
+  if ( !idsubscription) {
     return res.status(400).json({ message: 'Todos los campos son obligatorios' });
   }
 
   try {
-    new mongoose.Types.ObjectId(iduser)
     new mongoose.Types.ObjectId(idsubscription)
   } catch (error) {
     return res.status(400).json({ message: 'Los ids son inválidos' });
@@ -83,16 +83,16 @@ export function verifyUser(req, res, next) {
 }
 
 export function verifySubscription(req, res, next) {
-  /*   if (!res.locals.data.subscription || !res.locals.data.subscription.expirationDate) {
+     if (!res.locals.data.subscription || !res.locals.data.subscription.expirationDate) {
       console.log(res.locals)
       console.log("[UNAUTHORIZED] No tiene suscripcion.")
-      return res.status(401).json({ message: 'No tienes permisos para realizar esta acción' });
+      return res.status(401).json({ message: 'No cuentas con una suscripción' });
     }
   
     if (hasSubscriptionExpired(res.locals.data.subscription.expirationDate)) {
       console.log("[UNAUTHORIZED] Suscripcion expirada.")
-      return res.status(403).json({ message: 'Tu suscripción ha expirado.' });
-    } */
+      return res.status(403).json({ message: 'No cuentas con una suscripción activa.' });
+    } 
 
   next();
 }
