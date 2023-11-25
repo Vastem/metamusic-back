@@ -67,7 +67,7 @@ export async function userLogin(req, res) {
         const user = await userService.login(req.body)
         const token = generateUserToken(user)
         res.cookie('authToken', token, { httpOnly: false })
-        res.json({ success: true });
+        res.json({ success: true, username: user.username, email: user.email, subscription: user.subscription });
     } catch (error) {
         console.log(error)
         res.status(error.statusCode).json(error.message)
