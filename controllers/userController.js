@@ -25,7 +25,8 @@ export async function updateUser(req, res) {
     const userService = new UserService()
     try {
         const userUpdated = await userService.updateUser(req.params.id, req.body)
-        res.status(200).json(userUpdated)
+        const { username, email, _id } = userUpdated
+        res.status(200).json({ username, email, id: _id } )
     } catch (error) {
         res.status(error.statusCode).json(error.message)
     }

@@ -27,7 +27,7 @@ export function validateLogin(req, res, next) {
 }
 
 export function validateUpdateUserData(req, res, next) {
-  const { username, email, password } = req.body;
+  const { username, email } = req.body;
 
   try {
     new mongoose.Types.ObjectId(req.params.id)
@@ -36,11 +36,7 @@ export function validateUpdateUserData(req, res, next) {
     return res.status(400).json({ message: 'El id es inválido' });
   }
 
-  if (!username || !email || !password) {
-    return res.status(400).json({ message: 'Todos los campos son obligatorios' });
-  }
-
-  if (typeof username !== 'string' || typeof email !== 'string' || typeof password !== 'string') {
+  if (typeof username !== 'string' || typeof email !== 'string') {
     return res.status(400).json({ message: 'Todos los campos deben ser cadenas de texto.' });
   }
 
