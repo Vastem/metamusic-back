@@ -83,7 +83,7 @@ export async function addSongToPlaylist(req, res) {
 export async function removeSongFromPlaylist(req, res) {
     const playlistService = new PlaylistService()
     try {
-        const playlist = await playlistService.removeSongFromPlaylist(req.body.idplaylist, req.body.idsong)
+        const playlist = await playlistService.removeSongFromPlaylist(req.params.idplaylist, req.body.idsong)
         res.status(200).json(playlist)
     } catch (error) {
         res.status(error.statusCode).json(error.message)

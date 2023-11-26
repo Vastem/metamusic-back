@@ -13,6 +13,6 @@ router.get("/:id", verifyToken, verifyUser, verifySubscription, validatePlaylist
 router.get("/search/byname/:name", verifyToken, verifyUser, verifySubscription, getPlaylistsByName)
 router.get("/search/byuser/:user", getPlaylistsByUser)
 router.put("/update/addsong/:idplaylist", verifyToken, verifyUser, verifySubscription, addSongToPlaylist)
-router.put("/update/removesong/", verifyToken, verifyUser, verifySubscription, removeSongFromPlaylist)
+router.put("/update/removesong/:idplaylist", verifyToken, verifyUser, verifySubscription, removeSongFromPlaylist)
 
 export default router
