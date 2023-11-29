@@ -68,11 +68,10 @@ export default class PlaylistDAO {
 
     async getByUser(username) {
         try {
-            const regex = new RegExp(username, "i");
-            const playlists = await PlayList.find({ 'user.username': { $regex: regex } });
-            return playlists;
+            const playlists = await PlayList.find({ 'user.username': username })
+            return playlists
         } catch (error) {
-            console.log(error);
+            console.log(error)
             throw new DataAccesError("Lo sentimos, se ha producido un problema en la base de datos. Por favor, inténtelo de nuevo más tarde.");
         }
     }

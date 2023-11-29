@@ -11,7 +11,7 @@ router.delete("/:id", verifyToken, verifyUser, verifySubscription, validatePlayl
 router.put("/:id", verifyToken, verifyUser, verifySubscription, validateUpdatePlaylistData, updatePlaylist)
 router.get("/:id", verifyToken, verifyUser, verifySubscription, validatePlaylistId, getPlaylist)
 router.get("/search/byname/:name", verifyToken, verifyUser, verifySubscription, getPlaylistsByName)
-router.get("/search/byuser/:user", getPlaylistsByUser)
+router.get("/search/byuser/:user", verifyToken, verifyUser, getPlaylistsByUser)
 router.put("/update/addsong/:idplaylist", verifyToken, verifyUser, verifySubscription, addSongToPlaylist)
 router.put("/update/removesong/", verifyToken, verifyUser, verifySubscription, removeSongFromPlaylist)
 

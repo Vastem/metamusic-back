@@ -14,9 +14,9 @@ export async function updatePlaylist(req, res) {
     const playlistService = new PlaylistService()
     try {
         const playlistUpdated = await playlistService.updatePlaylist(req.params.id, req.body)
-        res.status(200).json(playlistUpdated)
+        res.status(200).json({ success: true, playlist: playlistUpdated })
     } catch (error) {
-        res.status(error.statusCode).json({ message: error.message })
+        res.status(error.statusCode).json({ success: false, message: error.message })
     }
 }
 
@@ -24,9 +24,9 @@ export async function deletePlaylist(req, res) {
     const playlistService = new PlaylistService()
     try {
         const playlistDeleted = await playlistService.deletePlaylist(req.params.id)
-        res.status(200).json(playlistDeleted)
+        res.status(200).json({ success: true, playlist: playlistDeleted })
     } catch (error) {
-        res.status(error.statusCode).json({ message: error.message })
+        res.status(error.statusCode).json({ success: false, message: error.message })
     }
 }
 
