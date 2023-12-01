@@ -26,7 +26,7 @@ export async function updateUser(req, res) {
     try {
         const userUpdated = await userService.updateUser(req.params.id, req.body)
         const { username, email, _id } = userUpdated
-        res.status(200).json({ username, email, id: _id } )
+        res.status(200).json({ username, email, id: _id })
     } catch (error) {
         res.status(error.statusCode).json(error.message)
     }
@@ -85,7 +85,8 @@ export async function userLogout(req, res) {
 }
 
 export async function toSubscribe(req, res) {
-    const userId = res.locals.data.userid
+    const userId = res.locals.data.userId
+    console.log(userId)
     const userService = new UserService()
     try {
         const user = await userService.toSubscribe(userId, req.body.idsubscription)
