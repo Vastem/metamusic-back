@@ -66,13 +66,13 @@ export default class PlaylistDAO {
         }
     }
 
-    async getByUser(username) {
+    async getByUser(userId) {
         try {
-            const playlists = await PlayList.find({ 'user.username': username })
-            return playlists
+            const playlists = await PlayList.find({ 'user': new mongoose.Types.ObjectId(userId) });
+            return playlists;
         } catch (error) {
-            console.log(error)
-            throw new DataAccesError("Lo sentimos, se ha producido un problema en la base de datos. Por favor, inténtelo de nuevo más tarde.");
+            console.log(error);
+            throw new DataAccesError("Lo sentimos, se ha producido un problema en la base de datos. Por favor, inténtelo de nuevo más tarde.")
         }
     }
 }

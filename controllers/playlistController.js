@@ -1,6 +1,7 @@
 import PlaylistService from "../services/playlistService.js"
 
 export async function createPlaylist(req, res) {
+    console.log(req.body)
     const playlistService = new PlaylistService()
     try {
         const playlist = await playlistService.addPlaylist(req.body)
