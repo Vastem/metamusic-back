@@ -74,9 +74,10 @@ export async function getPlaylistsByUser(req, res) {
 export async function addSongToPlaylist(req, res) {
     const playlistService = new PlaylistService()
     try {
-        const playlist = await playlistService.addSongToPlaylist(req.params.idplaylist, req.body)
+        const playlist = await playlistService.addSongToPlaylist(req.params.idplaylist, req.body.song)
         res.status(200).json({ success: true, playlist: playlist })
     } catch (error) {
+        console.log(error)
         res.status(error.statusCode).json({ success: false, error: error.message })
     }
 }

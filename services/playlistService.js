@@ -54,14 +54,19 @@ export default class PlaylistService {
         const playlist = await this.PlaylistDAO.getById(idplaylist)
         if (!playlist) throw new NoDataFoundError('La playlist no existe.')
 
-        const songExist = await this.SongDAO.getByIdSong(song.idsong)
-        if (!songExist) throw new NoDataFoundError('La canción no existe.')
+
+        console.log(song)
+
+        /* const songExist = await this.SongDAO.getByIdSong(song.idsong)
+        if (!songExist) throw new NoDataFoundError('La canción no existe.') */
 
         const songInPlaylist = playlist.songs.find(s => s.idsong === song.idsong)
         if (songInPlaylist) {
             throw new ValidationError('La canción ya está en la playlist.')
         }
-        playlist.songs.push(songExist)
+        playlist.songs.push(song)
+
+        console.log(playlist.songs)
 
         const playlistUpdated = await this.PlaylistDAO.update(idplaylist, playlist)
         return playlistUpdated

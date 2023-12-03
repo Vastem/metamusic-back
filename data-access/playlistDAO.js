@@ -57,8 +57,7 @@ export default class PlaylistDAO {
 
     async getByName(name) {
         try {
-            const regex = new RegExp(name, "i");
-            const playlists = await PlayList.find({ name: { $regex: regex } });
+            const playlists = await PlayList.find({ name: name });
             return playlists
         } catch (error) {
             console.log(error);
