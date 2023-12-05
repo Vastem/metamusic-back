@@ -25,10 +25,10 @@ export async function updateUser(req, res) {
     const userService = new UserService()
     try {
         const userUpdated = await userService.updateUser(req.params.id, req.body)
-        const { username, email, _id } = userUpdated
-        res.status(200).json({ username, email, id: _id })
+        const { username, email, _id, image } = userUpdated
+        res.status(200).json({ success: true, username, email, id: _id, image })
     } catch (error) {
-        res.status(error.statusCode).json(error.message)
+        res.status(error.statusCode).json({ success: false, message: error.message })
     }
 }
 
@@ -67,11 +67,12 @@ export async function userLogin(req, res) {
     try {
         const user = await userService.login(req.body)
         const token = generateUserToken(user)
-        res.cookie('authToken', token, { httpOnly: false })
-        res.json({ success: true, id: user._id, username: user.username, email: user.email, subscription: user.subscription });
+        res.cookie('authToken', token, { maxAge: 7 * 24 * 60 * 60 * 1000, httpOnly: true })
+
+        console.log(user)
+        res.json({ success: true, id: user._id, username: user.username, email: user.email, image: user.image, subscription: user.subscription });
     } catch (error) {
-        console.log(error)
-        res.status(error.statusCode).json(error.message)
+        res.status(error.statusCode).json({ success: false, message: error.message })
     }
 }
 
@@ -91,9 +92,9 @@ export async function toSubscribe(req, res) {
     try {
         const user = await userService.toSubscribe(userId, req.body.idsubscription)
         const token = generateSubscriptionToken(user)
-        res.cookie('authToken', token, { httpOnly: false })
-        res.status(200).json(user)
+        res.cookie('authToken', token, { maxAge: 7 * 24 * 60 * 60 * 1000, httpOnly: true })
+        res.status(200).json({ success: true, message: 'Te haz suscrito con exito!', user: user })
     } catch (error) {
-        res.status(error.statusCode).json(error.message)
+        res.status(error.statusCode).json({ success: false, message: error.message })
     }
 }

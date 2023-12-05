@@ -45,16 +45,17 @@ export async function getPlaylist(req, res) {
     const playlistService = new PlaylistService()
     try {
         const playlist = await playlistService.getPlaylist(req.params.id)
-        res.status(200).json(playlist)
+        res.status(200).json({ success: true, playlist: playlist })
     } catch (error) {
-        res.status(error.statusCode).json(error.message)
+        res.status(error.statusCode).json({ success: false, message: error.message })
     }
 }
 
 export async function getPlaylistsByName(req, res) {
     const playlistService = new PlaylistService()
     try {
-        const playlists = await playlistService.getPlaylistsByName(req.params.name)
+        const id = res.locals.data.userId
+        const playlists = await playlistService.getPlaylistsByName(req.params.name, id)
         res.status(200).json(playlists)
     } catch (error) {
         res.status(error.statusCode).json(error.message)
@@ -78,7 +79,7 @@ export async function addSongToPlaylist(req, res) {
         res.status(200).json({ success: true, playlist: playlist })
     } catch (error) {
         console.log(error)
-        res.status(error.statusCode).json({ success: false, error: error.message })
+        res.status(error.statusCode).json({ success: false, message: error.message })
     }
 }
 

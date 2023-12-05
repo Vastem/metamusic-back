@@ -40,8 +40,8 @@ export default class PlaylistService {
         return playlist
     }
 
-    async getPlaylistsByName(name) {
-        const playlists = await this.PlaylistDAO.getByName(name)
+    async getPlaylistsByName(name, userId) {
+        const playlists = await this.PlaylistDAO.getByName(name, userId)
         return playlists
     }
 
