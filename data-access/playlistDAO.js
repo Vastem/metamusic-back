@@ -67,7 +67,6 @@ export default class PlaylistDAO {
 
     async getByUser(userId) {
         try {
-            console.log(userId)
             const playlists = await PlayList.find({ 'user': new mongoose.Types.ObjectId(userId) });
             return playlists;
         } catch (error) {

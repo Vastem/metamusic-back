@@ -9,6 +9,7 @@ export function generateUserToken(user) {
             userId: user._id,
             username: user.username,
             email: user.email,
+            image: user.image,
             rol: "user",
             subscription: user.subscription
         }
@@ -68,7 +69,7 @@ export function authenticated(req, res, next) {
                 res.json({ isAuthenticated: false });
             } else {
                 // Si el token es válido, envía una respuesta indicando que el usuario está autenticado
-                res.json({ isAuthenticated: true, username: decoded.username });
+                res.json({ isAuthenticated: true, id: decoded.userId, username: decoded.username, email: decoded.email, image: decoded.image })
             }
         })
     } catch (error) {
