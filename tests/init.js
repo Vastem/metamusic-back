@@ -78,7 +78,7 @@ try {
                 name: "Que Onda",
                 album: "Que Onda",
                 duration: 191,
-                singers: "Kenya Grace",
+                singers: "Calle 2",
                 image: "https://e-cdns-images.dzcdn.net/images/cover/6e3e7d38cb73367bce8531754ded643d/1000x1000-000000-80-0-0.jpg"
             },
             {
@@ -273,7 +273,7 @@ try {
     })
 
     subscriptionDAO.create({
-        type: "Bombastic",
+        type: "Platinum+",
         cost: 500,
         duration: 180
     })
