@@ -57,7 +57,21 @@ export default class PlaylistDAO {
 
     async getByName(name, userId) {
         try {
-            const playlists = await PlayList.find({ name: name, 'user': new mongoose.Types.ObjectId(userId) })
+            const playlists = await PlayList.find({ name: name, 'user': new mongoose.Types.ObjectId(userId) });
+            if (playlists.length === 0) {
+
+                return null
+            }
+            return playlists;
+        } catch (error) {
+            console.log(error);
+            throw new DataAccesError("Lo sentimos, se ha producido un problema en la base de datos. Por favor, inténtelo de nuevo más tarde.");
+        }
+    }
+
+    async getByUser(userId) {
+        try {
+            const playlists = await PlayList.find({ 'user': new mongoose.Types.ObjectId(userId) });
             return playlists;
         } catch (error) {
             console.log(error);
@@ -65,9 +79,9 @@ export default class PlaylistDAO {
         }
     }
 
-    async getByUser(userId) {
+    async getAdminPlaylists() {
         try {
-            const playlists = await PlayList.find({ 'user': new mongoose.Types.ObjectId(userId) });
+            const playlists = await PlayList.find({ 'type': 'admin' });
             return playlists;
         } catch (error) {
             console.log(error);

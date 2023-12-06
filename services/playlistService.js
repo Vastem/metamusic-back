@@ -12,6 +12,9 @@ export default class PlaylistService {
     async addPlaylist(playlistData) {
         const playlistExist = await this.PlaylistDAO.getById(playlistData.idplaylist)
         if (playlistExist) throw new ValidationError('El id de la playlist ya existe en la base de datos.')
+        const playlistNameExist = await this.PlaylistDAO.getByName(playlistData.name, playlistData.user)
+        if (playlistNameExist) throw new ValidationError('Ya cuentas con una playlist con ese nombre')
+
         const playlist = await this.PlaylistDAO.create(playlistData)
         return playlist
     }
@@ -19,6 +22,15 @@ export default class PlaylistService {
     async updatePlaylist(id, playlistData) {
         const playlistToUpdate = await this.PlaylistDAO.getById(id)
         if (!playlistToUpdate) throw new NoDataFoundError('La playlist no existe.')
+
+        if (playlistToUpdate.name !== playlistData.name) {
+            const playlistNameExist = await this.PlaylistDAO.getByName(playlistData.name, playlistData.user)
+            console.log(playlistNameExist)
+            if (playlistNameExist && playlistNameExist._id !== id) {
+                throw new ValidationError('Ya cuentas con una playlist con ese nombre');
+            }
+        }
+
         const playlistUpdated = await this.PlaylistDAO.update(id, playlistData)
         return playlistUpdated
     }
@@ -42,11 +54,17 @@ export default class PlaylistService {
 
     async getPlaylistsByName(name, userId) {
         const playlists = await this.PlaylistDAO.getByName(name, userId)
+        if (!playlists) throw new NoDataFoundError('No se han encontrado playlists con ese nombre.')
         return playlists
     }
 
     async getPlaylistsByUser(user) {
         const playlists = await this.PlaylistDAO.getByUser(user)
+        return playlists
+    }
+
+    async getPlaylistsAdmin() {
+        const playlists = await this.PlaylistDAO.getAdminPlaylists()
         return playlists
     }
 

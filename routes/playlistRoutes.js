@@ -1,5 +1,5 @@
 import { Router } from "express"
-import { createPlaylist, deletePlaylist, getPlaylist, getPlaylists, updatePlaylist, getPlaylistsByName, getPlaylistsByUser, addSongToPlaylist, removeSongFromPlaylist } from "../controllers/playlistController.js"
+import { createPlaylist, deletePlaylist, getPlaylist, getPlaylists, updatePlaylist, getPlaylistsByName, getPlaylistsByUser, addSongToPlaylist, removeSongFromPlaylist, getAdminPlaylists } from "../controllers/playlistController.js"
 import { validateAddPlaylistData, validatePlaylistId, validateUpdatePlaylistData } from "../middlewares/validatePlaylist.js"
 import { verifyToken } from "../middlewares/jwt.js"
 import { verifySubscription, verifyUser } from "../middlewares/validateUser.js"
@@ -12,6 +12,7 @@ router.put("/:id", verifyToken, verifyUser, verifySubscription, validateUpdatePl
 router.get("/:id", verifyToken, verifyUser, verifySubscription, validatePlaylistId, getPlaylist)
 router.get("/search/byname/:name", verifyToken, verifyUser, verifySubscription, getPlaylistsByName)
 router.get("/search/byuser/:user", verifyToken, verifyUser, getPlaylistsByUser)
+router.get("/search/admin/", verifyToken, verifyUser, getAdminPlaylists)
 router.put("/update/addsong/:idplaylist", verifyToken, verifyUser, verifySubscription, addSongToPlaylist)
 router.put("/update/removesong/:idplaylist", verifyToken, verifyUser, verifySubscription, removeSongFromPlaylist)
 

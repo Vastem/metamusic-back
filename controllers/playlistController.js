@@ -16,6 +16,7 @@ export async function updatePlaylist(req, res) {
         const playlistUpdated = await playlistService.updatePlaylist(req.params.id, req.body)
         res.status(200).json({ success: true, playlist: playlistUpdated })
     } catch (error) {
+        console.log(error)
         res.status(error.statusCode).json({ success: false, message: error.message })
     }
 }
@@ -54,10 +55,11 @@ export async function getPlaylistsByName(req, res) {
     const playlistService = new PlaylistService()
     try {
         const id = res.locals.data.userId
-        const playlists = await playlistService.getPlaylistsByName(req.params.name, id)
-        res.status(200).json(playlists)
+        const playlist = await playlistService.getPlaylistsByName(req.params.name, id)
+
+        res.status(200).json({ success: true, playlist: playlist[0] })
     } catch (error) {
-        res.status(error.statusCode).json(error.message)
+        res.status(error.statusCode).json({ success: false, message: error.message })
     }
 }
 
@@ -68,6 +70,17 @@ export async function getPlaylistsByUser(req, res) {
         res.status(200).json(playlists)
     } catch (error) {
         res.status(error.statusCode).json(error.message)
+    }
+}
+
+export async function getAdminPlaylists(req, res) {
+    const playlistService = new PlaylistService()
+    try {
+        const playlists = await playlistService.getPlaylistsAdmin()
+        res.status(200).json({ success: true, playlists: playlists })
+    } catch (error) {
+        console.log(error)
+        res.status(error.statusCode).json({ success: false, message: error.message })
     }
 }
 
